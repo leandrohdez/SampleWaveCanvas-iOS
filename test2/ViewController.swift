@@ -97,8 +97,6 @@ class ViewController: UIViewController {
         
         self.waveLayer.path = wavePath(amountX: pathX, amountY: pathY)
         
-        NSLog("x: \(pathX) - y: \(pathY)")
-        
         // si ha terminado
         if recognizer.state == UIGestureRecognizerState.Ended {
              self.starBoundAnimation(posX: pathX, poxY: pathY)
