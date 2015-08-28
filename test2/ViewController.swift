@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var fingerDragGesture = UIPanGestureRecognizer(target: self, action: Selector("dragingView:"))
+        var fingerDragGesture = UIPanGestureRecognizer(target: self, action: Selector("dragingFinger:"))
         self.canvasView.addGestureRecognizer(fingerDragGesture)
     }
     
@@ -86,7 +86,7 @@ class ViewController: UIViewController {
     
     
     
-    func dragingView(recognizer: UIPanGestureRecognizer){
+    func dragingFinger(recognizer: UIPanGestureRecognizer){
         var location: CGPoint = recognizer.locationInView(self.view)
         
         var centerOriginX = CGRectGetWidth(self.canvasView.frame)/2
