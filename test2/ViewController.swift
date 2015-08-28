@@ -96,6 +96,8 @@ class ViewController: UIViewController {
         var pathY = location.y - centerOriginY
         
         self.waveLayer.path = wavePath(amountX: pathX, amountY: pathY)
+
+        NSLog("master")
         
         // si ha terminado
         if recognizer.state == UIGestureRecognizerState.Ended {
