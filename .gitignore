@@ -33,3 +33,5 @@ DerivedData
 Carthage/Build
 
 *.xcuserstate
+
+*.xcuserstate
