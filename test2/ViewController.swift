@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var fingerDragGesture = UIPanGestureRecognizer(target: self, action: Selector("dragingFinger:"))
+        let fingerDragGesture = UIPanGestureRecognizer(target: self, action: Selector("dragingFinger:"))
         self.canvasView.addGestureRecognizer(fingerDragGesture)
     }
     
@@ -33,19 +33,19 @@ class ViewController: UIViewController {
         self.canvasView.layer.addSublayer(self.waveLayer)
     }
     
-    func wavePath(#amountX:CGFloat, amountY:CGFloat) -> CGPathRef {
+    func wavePath(amountX amountX:CGFloat, amountY:CGFloat) -> CGPathRef {
         let w = self.canvasView.frame.width
         let h = self.canvasView.frame.height
         let centerY:CGFloat = 0
         let bottomY = h
         
-        var topLeftPoint = CGPointMake(0, centerY)
-        var topMidPoint = CGPointMake(w / 2 + amountX, centerY + amountY)
-        var topRightPoint = CGPointMake(w, centerY)
+        let topLeftPoint = CGPointMake(0, centerY)
+        let topMidPoint = CGPointMake(w / 2 + amountX, centerY + amountY)
+        let topRightPoint = CGPointMake(w, centerY)
         let bottomLeftPoint = CGPointMake(0, bottomY)
         let bottomRightPoint = CGPointMake(w, bottomY)
         
-        var bezierPath = UIBezierPath()
+        let bezierPath = UIBezierPath()
         bezierPath.moveToPoint(bottomLeftPoint)
         bezierPath.addLineToPoint(topLeftPoint)
         bezierPath.addQuadCurveToPoint(topRightPoint, controlPoint: topMidPoint)
@@ -53,12 +53,12 @@ class ViewController: UIViewController {
         return bezierPath.CGPath
     }
     
-    func starBoundAnimation(#posX:CGFloat, poxY:CGFloat) {
+    func starBoundAnimation(posX posX:CGFloat, poxY:CGFloat) {
         self.waveLayer.path = wavePath(amountX: 0.0, amountY: 0.0)
-        var bounce = CAKeyframeAnimation(keyPath: "path")
+        let bounce = CAKeyframeAnimation(keyPath: "path")
         bounce.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         
-        var values = [
+        let values = [
             self.wavePath(amountX: posX, amountY: poxY),
             self.wavePath(amountX: 0, amountY: -100),
             
@@ -80,24 +80,22 @@ class ViewController: UIViewController {
         self.waveLayer.addAnimation(bounce, forKey: "return")
     }
     
-    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         self.waveLayer.path = wavePath(amountX: 0.0, amountY: 0.0)
     }
     
     
     
     func dragingFinger(recognizer: UIPanGestureRecognizer){
-        var location: CGPoint = recognizer.locationInView(self.view)
+        let location: CGPoint = recognizer.locationInView(self.view)
         
-        var centerOriginX = CGRectGetWidth(self.canvasView.frame)/2
-        var centerOriginY = CGRectGetMinY(self.canvasView.frame)
+        let centerOriginX = CGRectGetWidth(self.canvasView.frame)/2
+        let centerOriginY = CGRectGetMinY(self.canvasView.frame)
         
-        var pathX = location.x - centerOriginX
-        var pathY = location.y - centerOriginY
+        let pathX = location.x - centerOriginX
+        let pathY = location.y - centerOriginY
         
         self.waveLayer.path = wavePath(amountX: pathX, amountY: pathY)
-
-        NSLog("master")
         
         // si ha terminado
         if recognizer.state == UIGestureRecognizerState.Ended {
